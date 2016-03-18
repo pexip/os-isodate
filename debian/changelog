@@ -1,3 +1,9 @@
+isodate (0.5.0-1pexip1) pexip; urgency=low
+
+  * Prepare Pexip packaging
+
+ -- John-Mark Bell <jmb@pexip.com>  Fri, 18 Mar 2016 16:41:12 +0000
+
 isodate (0.5.0-1) unstable; urgency=medium
 
   [ James Hunt ]
