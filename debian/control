@@ -12,7 +12,7 @@ Homepage: https://pypi.python.org/pypi/isodate
 Vcs-Git: git://anonscm.debian.org/python-modules/packages/isodate.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=python-modules/packages/isodate.git
 XS-Testsuite: autopkgtest
-XS-Pexip-Upstream: http://ftp.debian.org/debian/ jessie
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ stretch
 
 Package: python-isodate
 Architecture: all
