@@ -46,7 +46,7 @@ def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
 setup(name='isodate',
-      version='0.5.0',
+      version='0.5.4',
       packages=['isodate', 'isodate.tests'],
       package_dir={'': 'src'},
 
@@ -56,9 +56,9 @@ setup(name='isodate',
       # PyPI metadata
       author='Gerhard Weis',
       author_email='gerhard.weis@proclos.com',
-      description='An ISO 8601 date/time/duration parser and formater',
+      description='An ISO 8601 date/time/duration parser and formatter',
       license='BSD',
-      #keywords = '',
+      # keywords = '',
       url='http://cheeseshop.python.org/pypi/isodate',
 
       long_description=(read('README.rst') +
@@ -75,9 +75,10 @@ setup(name='isodate',
                    'Programming Language :: Python :: 2.7',
                    'Programming Language :: Python :: 3.2',
                    'Programming Language :: Python :: 3.3',
+                   'Programming Language :: Python :: 3.4',
                    'Programming Language :: Python :: Implementation :: PyPy',
                    'Topic :: Internet',
-                   'Topic :: Software Development :: Libraries :: Python Modules',
+                   ('Topic :: Software Development :'
+                    ': Libraries :: Python Modules'),
                    ],
-      **setupargs
-     )
+      **setupargs)
