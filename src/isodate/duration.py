@@ -40,13 +40,13 @@ def fquotmod(val, low, high):
 
     '''
     # assumes that all the maths is done with Decimals.
-    # divmod for Decimal uses truncate instead of floor as builtin divmod, so we have
-    # to do it manually here.
+    # divmod for Decimal uses truncate instead of floor as builtin
+    # divmod, so we have to do it manually here.
     a, b = val - low, high - low
     div = (a / b).to_integral(ROUND_FLOOR)
     mod = a - div * b
     # if we were not usig Decimal, it would look like this.
-    #div, mod = divmod(val - low, high - low)
+    # div, mod = divmod(val - low, high - low)
     mod += low
     return int(div), mod
 
@@ -101,6 +101,12 @@ class Duration(object):
         self.tdelta = timedelta(days, seconds, microseconds, milliseconds,
                                 minutes, hours, weeks)
 
+    def __getstate__(self):
+        return self.__dict__
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+
     def __getattr__(self, name):
         '''
         Provide direct access to attributes of included timedelta instance.
@@ -124,9 +130,16 @@ class Duration(object):
         Return a string suitable for repr(x) calls.
         '''
         return "%s.%s(%d, %d, %d, years=%d, months=%d)" % (
-                self.__class__.__module__, self.__class__.__name__,
-                self.tdelta.days, self.tdelta.seconds,
-                self.tdelta.microseconds, self.years, self.months)
+            self.__class__.__module__, self.__class__.__name__,
+            self.tdelta.days, self.tdelta.seconds,
+            self.tdelta.microseconds, self.years, self.months)
+
+    def __hash__(self):
+        '''
+        Return a hash of this instance so that it can be used in, for
+        example, dicts and sets.
+        '''
+        return hash((self.tdelta, self.months, self.years))
 
     def __neg__(self):
         """
@@ -153,8 +166,10 @@ class Duration(object):
             newduration.tdelta = self.tdelta + other.tdelta
             return newduration
         if isinstance(other, (date, datetime)):
-            if (not( float(self.years).is_integer() and float(self.months).is_integer())):
-                raise ValueError('fractional years or months not supported for date calculations')
+            if (not(float(self.years).is_integer() and
+                    float(self.months).is_integer())):
+                raise ValueError('fractional years or months not supported'
+                                 ' for date calculations')
             newmonth = other.month + self.months
             carry, newmonth = fquotmod(newmonth, 1, 13)
             newyear = other.year + self.years + carry
@@ -177,8 +192,10 @@ class Duration(object):
             newduration.tdelta = self.tdelta + other
             return newduration
         if isinstance(other, (date, datetime)):
-            if (not( float(self.years).is_integer() and float(self.months).is_integer())):
-                raise ValueError('fractional years or months not supported for date calculations')
+            if (not(float(self.years).is_integer() and
+                    float(self.months).is_integer())):
+                raise ValueError('fractional years or months not supported'
+                                 ' for date calculations')
             newmonth = other.month + self.months
             carry, newmonth = fquotmod(newmonth, 1, 13)
             newyear = other.year + self.years + carry
@@ -189,6 +206,27 @@ class Duration(object):
                 newday = other.day
             newdt = other.replace(year=newyear, month=newmonth, day=newday)
             return newdt + self.tdelta
+        raise TypeError('unsupported operand type(s) for +: %s and %s' %
+                        (other.__class__, self.__class__))
+
+    def __mul__(self, other):
+        if isinstance(other, int):
+            newduration = Duration(
+                years=self.years * other,
+                months=self.months * other)
+            newduration.tdelta = self.tdelta * other
+            return newduration
+        raise TypeError('unsupported operand type(s) for +: %s and %s' %
+                        (self.__class__, other.__class__))
+
+    def __rmul__(self, other):
+
+        if isinstance(other, int):
+            newduration = Duration(
+                years=self.years * other,
+                months=self.months * other)
+            newduration.tdelta = self.tdelta * other
+            return newduration
         raise TypeError('unsupported operand type(s) for +: %s and %s' %
                         (other.__class__, self.__class__))
 
@@ -214,10 +252,12 @@ class Duration(object):
         It is possible to subtract Duration objecs from date, datetime and
         timedelta objects.
         '''
-        #print '__rsub__:', self, other
+        # print '__rsub__:', self, other
         if isinstance(other, (date, datetime)):
-            if (not( float(self.years).is_integer() and float(self.months).is_integer())):
-                raise ValueError('fractional years or months not supported for date calculations')
+            if (not(float(self.years).is_integer() and
+                    float(self.months).is_integer())):
+                raise ValueError('fractional years or months not supported'
+                                 ' for date calculations')
             newmonth = other.month - self.months
             carry, newmonth = fquotmod(newmonth, 1, 13)
             newyear = other.year - self.years + carry
@@ -240,13 +280,14 @@ class Duration(object):
         If the years, month part and the timedelta part are both equal, then
         the two Durations are considered equal.
         '''
-        if (isinstance(other, timedelta) and
-            self.years == 0 and self.months == 0):
+        if ((isinstance(other, timedelta) and
+             self.years == 0 and self.months == 0)):
             return self.tdelta == other
         if not isinstance(other, Duration):
             return NotImplemented
-        if ((self.years * 12 + self.months) ==
-            (other.years * 12 + other.months) and self.tdelta == other.tdelta):
+        if (((self.years * 12 + self.months) ==
+             (other.years * 12 + other.months) and
+             self.tdelta == other.tdelta)):
             return True
         return False
 
@@ -255,12 +296,15 @@ class Duration(object):
         If the years, month part or the timedelta part is not equal, then
         the two Durations are considered not equal.
         '''
-        if isinstance(other, timedelta) and self.years == 0 and self.months == 0:
+        if ((isinstance(other, timedelta) and
+             self.years == 0 and
+             self.months == 0)):
             return self.tdelta != other
         if not isinstance(other, Duration):
             return NotImplemented
-        if ((self.years * 12 + self.months) !=
-            (other.years * 12 + other.months) or self.tdelta != other.tdelta):
+        if (((self.years * 12 + self.months) !=
+             (other.years * 12 + other.months) or
+             self.tdelta != other.tdelta)):
             return True
         return False
 

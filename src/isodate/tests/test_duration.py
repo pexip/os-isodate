@@ -55,7 +55,7 @@ PARSE_TEST_CASES = {'P18Y9M4DT11H9M8S': (Duration(4, 8, 0, 0, 9, 11, 0, 9, 18),
                     '-P2.2W': (timedelta(weeks=-2.2), D_DEFAULT,
                                '-P15DT9H36M'),
                     'P1DT2H3M4S': (timedelta(days=1, hours=2, minutes=3,
-                                            seconds=4), D_DEFAULT, None),
+                                             seconds=4), D_DEFAULT, None),
                     'P1DT2H3M': (timedelta(days=1, hours=2, minutes=3),
                                  D_DEFAULT, None),
                     'P1DT2H': (timedelta(days=1, hours=2), D_DEFAULT, None),
@@ -76,7 +76,7 @@ PARSE_TEST_CASES = {'P18Y9M4DT11H9M8S': (Duration(4, 8, 0, 0, 9, 11, 0, 9, 18),
                     # alternative format
                     'P0018-09-04T11:09:08': (Duration(4, 8, 0, 0, 9, 11, 0, 9,
                                                       18), D_ALT_EXT, None),
-                    #'PT000022.22': timedelta(seconds=22.22),
+                    # 'PT000022.22': timedelta(seconds=22.22),
                     }
 
 #                       d1                    d2           '+', '-', '>'
@@ -98,137 +98,163 @@ MATH_TEST_CASES = (('P5Y7M1DT9H45M16.72S', 'PT27M24.68S',
                    ('PT1H1.95S', 'P1332DT55M0.33S',
                     'P1332DT1H55M2.28S', '-P1331DT23H54M58.38S', False))
 
+
 # A list of test cases to test addition and subtraction of date/datetime
 # and Duration objects. They are tested against the results of an
 # equal long timedelta duration.
-DATE_TEST_CASES = ( (date(2008, 2, 29),
-                     timedelta(days=10, hours=12, minutes=20),
-                     Duration(days=10, hours=12, minutes=20)),
-                    (date(2008, 1, 31),
-                     timedelta(days=10, hours=12, minutes=20),
-                     Duration(days=10, hours=12, minutes=20)),
-                    (datetime(2008, 2, 29),
-                     timedelta(days=10, hours=12, minutes=20),
-                     Duration(days=10, hours=12, minutes=20)),
-                    (datetime(2008, 1, 31),
-                     timedelta(days=10, hours=12, minutes=20),
-                     Duration(days=10, hours=12, minutes=20)),
-                    (datetime(2008, 4, 21),
-                     timedelta(days=10, hours=12, minutes=20),
-                     Duration(days=10, hours=12, minutes=20)),
-                    (datetime(2008, 5, 5),
-                     timedelta(days=10, hours=12, minutes=20),
-                     Duration(days=10, hours=12, minutes=20)),
-                    (datetime(2000, 1, 1),
-                     timedelta(hours=-33),
-                     Duration(hours=-33)),
-                    (datetime(2008, 5, 5),
-                     Duration(years=1, months=1, days=10, hours=12,
-                              minutes=20),
-                     Duration(months=13, days=10, hours=12, minutes=20)),
-                    (datetime(2000, 3, 30),
-                     Duration(years=1, months=1, days=10, hours=12,
-                              minutes=20),
-                     Duration(months=13, days=10, hours=12, minutes=20)),
-                     )
+DATE_TEST_CASES = ((date(2008, 2, 29),
+                    timedelta(days=10, hours=12, minutes=20),
+                    Duration(days=10, hours=12, minutes=20)),
+                   (date(2008, 1, 31),
+                    timedelta(days=10, hours=12, minutes=20),
+                    Duration(days=10, hours=12, minutes=20)),
+                   (datetime(2008, 2, 29),
+                    timedelta(days=10, hours=12, minutes=20),
+                    Duration(days=10, hours=12, minutes=20)),
+                   (datetime(2008, 1, 31),
+                    timedelta(days=10, hours=12, minutes=20),
+                    Duration(days=10, hours=12, minutes=20)),
+                   (datetime(2008, 4, 21),
+                    timedelta(days=10, hours=12, minutes=20),
+                    Duration(days=10, hours=12, minutes=20)),
+                   (datetime(2008, 5, 5),
+                    timedelta(days=10, hours=12, minutes=20),
+                    Duration(days=10, hours=12, minutes=20)),
+                   (datetime(2000, 1, 1),
+                    timedelta(hours=-33),
+                    Duration(hours=-33)),
+                   (datetime(2008, 5, 5),
+                    Duration(years=1, months=1, days=10, hours=12,
+                             minutes=20),
+                    Duration(months=13, days=10, hours=12, minutes=20)),
+                   (datetime(2000, 3, 30),
+                    Duration(years=1, months=1, days=10, hours=12,
+                             minutes=20),
+                    Duration(months=13, days=10, hours=12, minutes=20)),
+                   )
 
 # A list of test cases of additon of date/datetime and Duration. The results
 # are compared against a given expected result.
 DATE_CALC_TEST_CASES = (
-                    (date(2000, 2, 1),
-                     Duration(years=1, months=1),
-                     date(2001, 3, 1)),
-                    (date(2000, 2, 29),
-                     Duration(years=1, months=1),
-                     date(2001, 3, 29)),
-                    (date(2000, 2, 29),
-                     Duration(years=1),
-                     date(2001, 2, 28)),
-                    (date(1996, 2, 29),
-                     Duration(years=4),
-                     date(2000, 2, 29)),
-                    (date(2096, 2, 29),
-                     Duration(years=4),
-                     date(2100, 2, 28)),
-                    (date(2000, 2, 1),
-                     Duration(years=-1, months=-1),
-                     date(1999, 1, 1)),
-                    (date(2000, 2, 29),
-                     Duration(years=-1, months=-1),
-                     date(1999, 1, 29)),
-                    (date(2000, 2, 1),
-                     Duration(years=1, months=1, days=1),
-                     date(2001, 3, 2)),
-                    (date(2000, 2, 29),
-                     Duration(years=1, months=1, days=1),
-                     date(2001, 3, 30)),
-                    (date(2000, 2, 29),
-                     Duration(years=1, days=1),
-                     date(2001, 3, 1)),
-                    (date(1996, 2, 29),
-                     Duration(years=4, days=1),
-                     date(2000, 3, 1)),
-                    (date(2096, 2, 29),
-                     Duration(years=4, days=1),
-                     date(2100, 3, 1)),
-                    (date(2000, 2, 1),
-                     Duration(years=-1, months=-1, days=-1),
-                     date(1998, 12, 31)),
-                    (date(2000, 2, 29),
-                     Duration(years=-1, months=-1, days=-1),
-                     date(1999, 1, 28)),
-                    (date(2001, 4, 1),
-                     Duration(years=-1, months=-1, days=-1),
-                     date(2000, 2, 29)),
-                    (date(2000, 4, 1),
-                     Duration(years=-1, months=-1, days=-1),
-                     date(1999, 2, 28)),
-                    (Duration(years=1, months=2),
-                     Duration(years=0, months=0, days=1),
-                     Duration(years=1, months=2, days=1)),
-                    (Duration(years=-1, months=-1, days=-1),
-                     date(2000, 4, 1),
-                     date(1999, 2, 28)),
-                    (Duration(years=1, months=1, weeks=5),
-                     date(2000, 1, 30),
-                     date(2001, 4, 4)),
-                    (parse_duration("P1Y1M5W"),
-                     date(2000, 1, 30),
-                     date(2001, 4, 4)),
-                    (parse_duration("P0.5Y"),
-                     date(2000, 1, 30),
-                     None),
-                    (Duration(years=1, months=1, hours=3),
-                     datetime(2000, 1, 30, 12, 15, 00),
-                     datetime(2001, 2, 28, 15, 15, 00)),
-                    (parse_duration("P1Y1MT3H"),
-                     datetime(2000, 1, 30, 12, 15, 00),
-                     datetime(2001, 2, 28, 15, 15, 00)),
-                    (Duration(years=1, months=2),
-                     timedelta(days=1),
-                     Duration(years=1, months=2, days=1)),
-                    (timedelta(days=1),
-                     Duration(years=1, months=2),
-                     Duration(years=1, months=2, days=1)),
-                    (datetime(2008, 1, 1, 0, 2),
-                     Duration(months=1),
-                     datetime(2008, 2, 1, 0, 2)),
-                    (datetime.strptime("200802", "%Y%M"),
-                     parse_duration("P1M"),
-                     datetime(2008, 2, 1, 0, 2)),
-                    (datetime(2008, 2, 1),
-                     Duration(months=1),
-                     datetime(2008, 3, 1)),
-                    (datetime.strptime("200802", "%Y%m"),
-                     parse_duration("P1M"),
-                     datetime(2008, 3, 1)),
-                    # (date(2000, 1, 1),
-                    #  Duration(years=1.5),
-                    #  date(2001, 6, 1)),
-                    # (date(2000, 1, 1),
-                    #  Duration(years=1, months=1.5),
-                    #  date(2001, 2, 14)),
-                    )
+    (date(2000, 2, 1),
+     Duration(years=1, months=1),
+     date(2001, 3, 1)),
+    (date(2000, 2, 29),
+     Duration(years=1, months=1),
+     date(2001, 3, 29)),
+    (date(2000, 2, 29),
+     Duration(years=1),
+     date(2001, 2, 28)),
+    (date(1996, 2, 29),
+     Duration(years=4),
+     date(2000, 2, 29)),
+    (date(2096, 2, 29),
+     Duration(years=4),
+     date(2100, 2, 28)),
+    (date(2000, 2, 1),
+     Duration(years=-1, months=-1),
+     date(1999, 1, 1)),
+    (date(2000, 2, 29),
+     Duration(years=-1, months=-1),
+     date(1999, 1, 29)),
+    (date(2000, 2, 1),
+     Duration(years=1, months=1, days=1),
+     date(2001, 3, 2)),
+    (date(2000, 2, 29),
+     Duration(years=1, months=1, days=1),
+     date(2001, 3, 30)),
+    (date(2000, 2, 29),
+     Duration(years=1, days=1),
+     date(2001, 3, 1)),
+    (date(1996, 2, 29),
+     Duration(years=4, days=1),
+     date(2000, 3, 1)),
+    (date(2096, 2, 29),
+     Duration(years=4, days=1),
+     date(2100, 3, 1)),
+    (date(2000, 2, 1),
+     Duration(years=-1, months=-1, days=-1),
+     date(1998, 12, 31)),
+    (date(2000, 2, 29),
+     Duration(years=-1, months=-1, days=-1),
+     date(1999, 1, 28)),
+    (date(2001, 4, 1),
+     Duration(years=-1, months=-1, days=-1),
+     date(2000, 2, 29)),
+    (date(2000, 4, 1),
+     Duration(years=-1, months=-1, days=-1),
+     date(1999, 2, 28)),
+    (Duration(years=1, months=2),
+     Duration(years=0, months=0, days=1),
+     Duration(years=1, months=2, days=1)),
+    (Duration(years=-1, months=-1, days=-1),
+     date(2000, 4, 1),
+     date(1999, 2, 28)),
+    (Duration(years=1, months=1, weeks=5),
+     date(2000, 1, 30),
+     date(2001, 4, 4)),
+    (parse_duration("P1Y1M5W"),
+     date(2000, 1, 30),
+     date(2001, 4, 4)),
+    (parse_duration("P0.5Y"),
+     date(2000, 1, 30),
+     None),
+    (Duration(years=1, months=1, hours=3),
+     datetime(2000, 1, 30, 12, 15, 00),
+     datetime(2001, 2, 28, 15, 15, 00)),
+    (parse_duration("P1Y1MT3H"),
+     datetime(2000, 1, 30, 12, 15, 00),
+     datetime(2001, 2, 28, 15, 15, 00)),
+    (Duration(years=1, months=2),
+     timedelta(days=1),
+     Duration(years=1, months=2, days=1)),
+    (timedelta(days=1),
+     Duration(years=1, months=2),
+     Duration(years=1, months=2, days=1)),
+    (datetime(2008, 1, 1, 0, 2),
+     Duration(months=1),
+     datetime(2008, 2, 1, 0, 2)),
+    (datetime.strptime("200802", "%Y%M"),
+     parse_duration("P1M"),
+     datetime(2008, 2, 1, 0, 2)),
+    (datetime(2008, 2, 1),
+     Duration(months=1),
+     datetime(2008, 3, 1)),
+    (datetime.strptime("200802", "%Y%m"),
+     parse_duration("P1M"),
+     datetime(2008, 3, 1)),
+    # (date(2000, 1, 1),
+    #  Duration(years=1.5),
+    #  date(2001, 6, 1)),
+    # (date(2000, 1, 1),
+    #  Duration(years=1, months=1.5),
+    #  date(2001, 2, 14)),
+    )
+
+# A list of test cases of multiplications of durations
+# are compared against a given expected result.
+DATE_MUL_TEST_CASES = (
+    (Duration(years=1, months=1),
+     3,
+     Duration(years=3, months=3)),
+    (Duration(years=1, months=1),
+     -3,
+     Duration(years=-3, months=-3)),
+    (3,
+     Duration(years=1, months=1),
+     Duration(years=3, months=3)),
+    (-3,
+     Duration(years=1, months=1),
+     Duration(years=-3, months=-3)),
+    (5,
+     Duration(years=2, minutes=40),
+     Duration(years=10, hours=3, minutes=20)),
+    (-5,
+     Duration(years=2, minutes=40),
+     Duration(years=-10, hours=-3, minutes=-20)),
+    (7,
+     Duration(years=1, months=2, weeks=40),
+     Duration(years=8, months=2, weeks=280)))
 
 
 class DurationTest(unittest.TestCase):
@@ -262,6 +288,16 @@ class DurationTest(unittest.TestCase):
                           'raise exception')
         self.assertRaises(TypeError, operator.add, 'raise exception',
                           Duration(years=1, months=1, weeks=5))
+        self.assertRaises(TypeError, operator.mul,
+                          Duration(years=1, months=1, weeks=5),
+                          'raise exception')
+        self.assertRaises(TypeError, operator.mul, 'raise exception',
+                          Duration(years=1, months=1, weeks=5))
+        self.assertRaises(TypeError, operator.mul,
+                          Duration(years=1, months=1, weeks=5),
+                          3.14)
+        self.assertRaises(TypeError, operator.mul, 3.14,
+                          Duration(years=1, months=1, weeks=5))
 
     def test_parseerror(self):
         '''
@@ -271,12 +307,29 @@ class DurationTest(unittest.TestCase):
 
     def test_repr(self):
         '''
-        Test __repr__ and __str__ for Duration obqects.
+        Test __repr__ and __str__ for Duration objects.
         '''
         dur = Duration(10, 10, years=10, months=10)
         self.assertEqual('10 years, 10 months, 10 days, 0:00:10', str(dur))
         self.assertEqual('isodate.duration.Duration(10, 10, 0,'
                          ' years=10, months=10)', repr(dur))
+
+    def test_hash(self):
+        '''
+        Test __hash__ for Duration objects.
+        '''
+        dur1 = Duration(10, 10, years=10, months=10)
+        dur2 = Duration(9, 9, years=9, months=9)
+        dur3 = Duration(10, 10, years=10, months=10)
+        self.assertNotEqual(hash(dur1), hash(dur2))
+        self.assertNotEqual(id(dur1), id(dur2))
+        self.assertEqual(hash(dur1), hash(dur3))
+        self.assertNotEqual(id(dur1), id(dur3))
+        durSet = set()
+        durSet.add(dur1)
+        durSet.add(dur2)
+        durSet.add(dur3)
+        self.assertEqual(len(durSet), 2)
 
     def test_neg(self):
         '''
@@ -290,7 +343,7 @@ class DurationTest(unittest.TestCase):
         self.assertNotEqual(-timedelta(days=365), Duration(years=-1))
         # FIXME: this test fails in python 3... it seems like python3
         #        treats a == b the same b == a
-        #self.assertNotEqual(-timedelta(days=10), -Duration(days=10))
+        # self.assertNotEqual(-timedelta(days=10), -Duration(days=10))
 
     def test_format(self):
         '''
@@ -333,18 +386,21 @@ class DurationTest(unittest.TestCase):
         self.assertEqual(Duration(days=1), timedelta(days=1))
         # FIXME: this test fails in python 3... it seems like python3
         #        treats a != b the same b != a
-        #self.assertNotEqual(timedelta(days=1), Duration(days=1))
+        # self.assertNotEqual(timedelta(days=1), Duration(days=1))
 
     def test_totimedelta(self):
         '''
         Test conversion form Duration to timedelta.
         '''
         dur = Duration(years=1, months=2, days=10)
-        self.assertEqual(dur.totimedelta(datetime(1998, 2, 25)), timedelta(434))
+        self.assertEqual(dur.totimedelta(datetime(1998, 2, 25)),
+                         timedelta(434))
         # leap year has one day more in february
-        self.assertEqual(dur.totimedelta(datetime(2000, 2, 25)), timedelta(435))
+        self.assertEqual(dur.totimedelta(datetime(2000, 2, 25)),
+                         timedelta(435))
         dur = Duration(months=2)
-        # march is longer than february, but april is shorter than march (cause only one day difference compared to 2)
+        # march is longer than february, but april is shorter than
+        # march (cause only one day difference compared to 2)
         self.assertEqual(dur.totimedelta(datetime(2000, 2, 25)), timedelta(60))
         self.assertEqual(dur.totimedelta(datetime(2001, 2, 25)), timedelta(59))
         self.assertEqual(dur.totimedelta(datetime(2001, 3, 25)), timedelta(61))
@@ -494,12 +550,35 @@ def create_datecalctestcase(start, duration, expectation):
     return unittest.TestLoader().loadTestsFromTestCase(TestDateCalc)
 
 
+def create_datemultestcase(operand1, operand2, expectation):
+    """
+    Create a TestCase class for a specific test.
+
+    This allows having a separate TestCase for each test tuple from the
+    DATE_CALC_TEST_CASES list, so that a failed test won't stop other tests.
+    """
+
+    class TestDateMul(unittest.TestCase):
+        '''
+        A test case template test addition operators for Duration objects.
+        '''
+
+        def test_mul(self):
+            '''
+            Test operator *.
+            '''
+            self.assertEqual(operand1 * operand2, expectation)
+
+    return unittest.TestLoader().loadTestsFromTestCase(TestDateMul)
+
+
 def test_suite():
     '''
     Return a test suite containing all test defined above.
     '''
     suite = unittest.TestSuite()
-    for durationstring, (expectation, format, altstr) in PARSE_TEST_CASES.items():
+    for durationstring, (expectation, format,
+                         altstr) in PARSE_TEST_CASES.items():
         suite.addTest(create_parsetestcase(durationstring, expectation,
                                            format, altstr))
     for testdata in MATH_TEST_CASES:
@@ -508,8 +587,11 @@ def test_suite():
         suite.addTest(create_datetestcase(*testdata))
     for testdata in DATE_CALC_TEST_CASES:
         suite.addTest(create_datecalctestcase(*testdata))
+    for testdata in DATE_MUL_TEST_CASES:
+        suite.addTest(create_datemultestcase(*testdata))
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(DurationTest))
     return suite
+
 
 # load_tests Protocol
 def load_tests(loader, tests, pattern):
