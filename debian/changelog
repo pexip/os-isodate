@@ -1,3 +1,10 @@
+isodate (0.6.0-2pexip1) pexip; urgency=medium
+
+  * Rebuild for bullseye.
+  * Re-introduce to Pexos as a dependency for python3-saml.
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Wed, 09 Jun 2021 21:00:02 +0100
+
 isodate (0.6.0-2) sid; urgency=medium
 
   * debian/control
@@ -17,6 +24,12 @@ isodate (0.6.0-1) sid; urgency=medium
   * Release to sid
 
  -- Maximiliano Curia <maxy@debian.org>  Thu, 04 Jan 2018 17:21:23 -0300
+
+isodate (0.5.4-1pexip1) pexip; urgency=medium
+
+  * Migrate to Stretch
+
+ -- John-Mark Bell <jmb@pexip.com>  Tue, 10 Jul 2018 11:06:51 +0000
 
 isodate (0.5.4-1) unstable; urgency=medium
 
@@ -43,6 +56,18 @@ isodate (0.5.1-1) experimental; urgency=medium
   * Bump compat to 9.
 
  -- Maximiliano Curia <maxy@debian.org>  Mon, 19 Jan 2015 15:17:06 +0100
+
+isodate (0.5.0-1pexip2) pexip; urgency=low
+
+  * No-change rebuild
+
+ -- John-Mark Bell <jmb@pexip.com>  Mon, 30 Jan 2017 17:14:38 +0000
+
+isodate (0.5.0-1pexip1) pexip; urgency=low
+
+  * Prepare Pexip packaging
+
+ -- John-Mark Bell <jmb@pexip.com>  Fri, 18 Mar 2016 16:41:12 +0000
 
 isodate (0.5.0-1) unstable; urgency=medium
 
