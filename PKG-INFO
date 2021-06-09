@@ -1,8 +1,8 @@
 Metadata-Version: 1.1
 Name: isodate
-Version: 0.5.4
+Version: 0.6.0
 Summary: An ISO 8601 date/time/duration parser and formatter
-Home-page: http://cheeseshop.python.org/pypi/isodate
+Home-page: https://github.com/gweis/isodate/
 Author: Gerhard Weis
 Author-email: gerhard.weis@proclos.com
 License: BSD
@@ -16,14 +16,11 @@ Description:
         .. image:: https://coveralls.io/repos/gweis/isodate/badge.svg?branch=master
             :target: https://coveralls.io/r/gweis/isodate?branch=master
             :alt: Coveralls
-        .. image:: https://pypip.in/version/isodate/badge.svg
-            :target: https://pypi.python.org/pypi/isodate/
+        .. image:: https://img.shields.io/pypi/v/isodate.svg
+            :target: https://pypi.python.org/pypi/isodate/          
             :alt: Latest Version
-        .. image:: https://pypip.in/download/isodate/badge.svg
-            :target: https://pypi.python.org/pypi/isodate/
-            :alt: Downloads
-        .. image:: https://pypip.in/license/isodate/badge.svg
-            :target: https://pypi.python.org/pypi/isodate/
+        .. image:: https://img.shields.io/pypi/l/isodate.svg
+            :target: https://pypi.python.org/pypi/isodate/          
             :alt: License
         
         
@@ -121,13 +118,21 @@ Description:
         The doc strings and unit tests should provide rather detailed information about
         the methods and their limitations.
         
-        The source release provides a *setup.py* script and a *buildout.cfg*. Both can
-        be used to run the unit tests included.
+        The source release provides a *setup.py* script,
+        which can be used to run the unit tests included.
         
         Source code is available at `<http://github.com/gweis/isodate>`_.
         
         CHANGES
         =======
+        
+        0.6.0 (2017-10-13)
+        ------------------
+        
+        - support incomplete month date (Fabien Loffredo)
+        - rely on duck typing when doing duration maths
+        - support ':' as separator in fractional time zones (usrenmae)
+        
         
         0.5.4 (2015-08-06)
         ------------------
@@ -265,9 +270,10 @@ Classifier: Operating System :: OS Independent
 Classifier: Programming Language :: Python
 Classifier: Programming Language :: Python :: 2.6
 Classifier: Programming Language :: Python :: 2.7
-Classifier: Programming Language :: Python :: 3.2
 Classifier: Programming Language :: Python :: 3.3
 Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
 Classifier: Programming Language :: Python :: Implementation :: PyPy
 Classifier: Topic :: Internet
 Classifier: Topic :: Software Development :: Libraries :: Python Modules

@@ -8,14 +8,11 @@ ISO 8601 date/time parser
 .. image:: https://coveralls.io/repos/gweis/isodate/badge.svg?branch=master
     :target: https://coveralls.io/r/gweis/isodate?branch=master
     :alt: Coveralls
-.. image:: https://pypip.in/version/isodate/badge.svg
-    :target: https://pypi.python.org/pypi/isodate/
+.. image:: https://img.shields.io/pypi/v/isodate.svg
+    :target: https://pypi.python.org/pypi/isodate/          
     :alt: Latest Version
-.. image:: https://pypip.in/download/isodate/badge.svg
-    :target: https://pypi.python.org/pypi/isodate/
-    :alt: Downloads
-.. image:: https://pypip.in/license/isodate/badge.svg
-    :target: https://pypi.python.org/pypi/isodate/
+.. image:: https://img.shields.io/pypi/l/isodate.svg
+    :target: https://pypi.python.org/pypi/isodate/          
     :alt: License
 
 
@@ -113,7 +110,7 @@ Further information:
 The doc strings and unit tests should provide rather detailed information about
 the methods and their limitations.
 
-The source release provides a *setup.py* script and a *buildout.cfg*. Both can
-be used to run the unit tests included.
+The source release provides a *setup.py* script,
+which can be used to run the unit tests included.
 
 Source code is available at `<http://github.com/gweis/isodate>`_.

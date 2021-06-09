@@ -1,5 +1,7 @@
 import unittest
-import cPickle as pickle
+
+from six.moves import cPickle as pickle
+
 import isodate
 
 
@@ -31,10 +33,16 @@ class TestPickle(unittest.TestCase):
                 pikl = pickle.dumps(dur, proto)
                 if dur != pickle.loads(pikl):
                     raise Exception("not equal")
-            except Exception, e:
+            except Exception as e:
                 failed.append("pickle proto %d failed (%s)" % (proto, repr(e)))
         self.assertEqual(len(failed), 0, "pickle protos failed: %s" %
                          str(failed))
+
+    def test_pickle_utc(self):
+        '''
+        isodate.UTC objects remain the same after pickling.
+        '''
+        self.assertTrue(isodate.UTC is pickle.loads(pickle.dumps(isodate.UTC)))
 
 
 def test_suite():
@@ -49,6 +57,7 @@ def test_suite():
 # load_tests Protocol
 def load_tests(loader, tests, pattern):
     return test_suite()
+
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

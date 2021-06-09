@@ -34,6 +34,8 @@ from datetime import timedelta
 from decimal import Decimal
 import re
 
+from six import string_types
+
 from isodate.duration import Duration
 from isodate.isoerror import ISO8601Error
 from isodate.isodatetime import parse_datetime
@@ -80,7 +82,7 @@ def parse_duration(datestring):
       The alternative format does not support durations with years, months or
       days set to 0.
     """
-    if not isinstance(datestring, basestring):
+    if not isinstance(datestring, string_types):
         raise TypeError("Expecting a string %r" % datestring)
     match = ISO8601_PERIOD_REGEX.match(datestring)
     if not match:

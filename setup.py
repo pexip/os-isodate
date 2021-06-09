@@ -26,32 +26,22 @@
 # CONTRACT, STRICT LIABILITY, OR TORT
 ##############################################################################
 import os
-import sys
-
-setupargs = {}
-
-try:
-    from setuptools import setup
-    setupargs['test_suite'] = 'isodate.tests.test_suite'
-    if sys.version[0] == '3':
-        setupargs['use_2to3'] = True
-except ImportError:
-    from distutils.core import setup
-    if sys.version[0] == '3':
-        from distutils.command.build_py import build_py_2to3
-        setupargs['cmdclass'] = {'build_py': build_py_2to3}
+from setuptools import setup
 
 
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
+
 setup(name='isodate',
-      version='0.5.4',
+      version='0.6.0',
       packages=['isodate', 'isodate.tests'],
       package_dir={'': 'src'},
 
       # dependencies:
-      # install_requires = [],
+      install_requires=[
+          'six'
+      ],
 
       # PyPI metadata
       author='Gerhard Weis',
@@ -59,7 +49,7 @@ setup(name='isodate',
       description='An ISO 8601 date/time/duration parser and formatter',
       license='BSD',
       # keywords = '',
-      url='http://cheeseshop.python.org/pypi/isodate',
+      url='https://github.com/gweis/isodate/',
 
       long_description=(read('README.rst') +
                         read('CHANGES.txt') +
@@ -73,12 +63,13 @@ setup(name='isodate',
                    'Programming Language :: Python',
                    'Programming Language :: Python :: 2.6',
                    'Programming Language :: Python :: 2.7',
-                   'Programming Language :: Python :: 3.2',
                    'Programming Language :: Python :: 3.3',
                    'Programming Language :: Python :: 3.4',
+                   'Programming Language :: Python :: 3.5',
+                   'Programming Language :: Python :: 3.6',
                    'Programming Language :: Python :: Implementation :: PyPy',
                    'Topic :: Internet',
                    ('Topic :: Software Development :'
                     ': Libraries :: Python Modules'),
                    ],
-      **setupargs)
+      test_suite='isodate.tests.test_suite')
