@@ -1,3 +1,9 @@
+isodate (0.6.0-2pexip2) pexip; urgency=medium
+
+  * Rebuild for main.
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Tue, 27 Jul 2021 19:01:21 +0100
+
 isodate (0.6.0-2pexip1) pexip; urgency=medium
 
   * Rebuild for bullseye.
