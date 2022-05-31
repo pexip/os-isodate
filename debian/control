@@ -13,7 +13,7 @@ Standards-Version: 4.1.3
 Homepage: https://pypi.python.org/pypi/isodate
 Vcs-Git: https://salsa.debian.org/python-team/modules/isodate.git
 Vcs-Browser: https://salsa.debian.org/python-team/modules/isodate
-XS-Pexip-Upstream: http://ftp.debian.org/debian/ bullseye
+XS-Pexip-Upstream: http://deb.debian.org/debian/ bullseye
 
 Package: python3-isodate
 Architecture: all
