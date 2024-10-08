@@ -1,28 +1,53 @@
 Metadata-Version: 2.1
 Name: isodate
-Version: 0.6.1
+Version: 0.7.0
 Summary: An ISO 8601 date/time/duration parser and formatter
-Home-page: https://github.com/gweis/isodate/
 Author: Gerhard Weis
-Author-email: gerhard.weis@proclos.com
-License: BSD
-Platform: UNKNOWN
+License: Copyright (c) 2021, Hugo van Kemenade and contributors
+        Copyright (c) 2009-2018, Gerhard Weis and contributors
+        Copyright (c) 2009, Gerhard Weis
+        All rights reserved.
+        
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are met:
+            * Redistributions of source code must retain the above copyright
+              notice, this list of conditions and the following disclaimer.
+            * Redistributions in binary form must reproduce the above copyright
+              notice, this list of conditions and the following disclaimer in the
+              documentation and/or other materials provided with the distribution.
+            * Neither the name of the <organization> nor the
+              names of its contributors may be used to endorse or promote products
+              derived from this software without specific prior written permission.
+        
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+        ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+        WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+        DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+        (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+        LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+        ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+        SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        
+Project-URL: Homepage, https://github.com/gweis/isodate/
 Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: BSD License
 Classifier: Operating System :: OS Independent
 Classifier: Programming Language :: Python
-Classifier: Programming Language :: Python :: 2
-Classifier: Programming Language :: Python :: 2.7
 Classifier: Programming Language :: Python :: 3
-Classifier: Programming Language :: Python :: 3.6
-Classifier: Programming Language :: Python :: 3.7
-Classifier: Programming Language :: Python :: 3.8
 Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: Implementation :: CPython
 Classifier: Programming Language :: Python :: Implementation :: PyPy
 Classifier: Topic :: Internet
 Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Description-Content-Type: text/x-rst
+License-File: LICENSE
 
 
 ISO 8601 date/time parser
@@ -35,10 +60,10 @@ ISO 8601 date/time parser
     :target: https://coveralls.io/r/gweis/isodate?branch=master
     :alt: Coveralls
 .. image:: https://img.shields.io/pypi/v/isodate.svg
-    :target: https://pypi.python.org/pypi/isodate/          
+    :target: https://pypi.python.org/pypi/isodate/
     :alt: Latest Version
 .. image:: https://img.shields.io/pypi/l/isodate.svg
-    :target: https://pypi.python.org/pypi/isodate/          
+    :target: https://pypi.python.org/pypi/isodate/
     :alt: License
 
 
@@ -59,12 +84,12 @@ As this module maps ISO 8601 dates/times to standard Python data types, like
 all possible ISO 8601 dates/times. For instance, dates before 0001-01-01 are
 not allowed by the Python *date* and *datetime* classes. Additionally
 fractional seconds are limited to microseconds. That means if the parser finds
-for instance nanoseconds it will round it to microseconds.
+for instance nanoseconds it will round it down to microseconds.
 
 Documentation
 -------------
 
-Currently there are four parsing methods available.
+The following parsing methods are available.
    * parse_time:
         parses an ISO 8601 time string into a *time* object
    * parse_date:
@@ -109,16 +134,15 @@ always the ISO 8601 expanded format. This is the same format used by
         prior 1900. This method also understands how to format *datetime* and
         *Duration* instances.
 
-Installation:
--------------
+Installation
+------------
 
 This module can easily be installed with Python standard installation methods.
 
-Either use *python setup.py install* or in case you have *setuptools* or
-*distribute* available, you can also use *easy_install*.
+Use *pip install isodate*.
 
-Limitations:
-------------
+Limitations
+-----------
 
    * The parser accepts several date/time representation which should be invalid
      according to ISO 8601 standard.
@@ -130,8 +154,8 @@ Limitations:
         1901-01-01.
      3. negative *Duration* and *timedelta* value are not fully supported yet.
 
-Further information:
---------------------
+Further information
+-------------------
 
 The doc strings and unit tests should provide rather detailed information about
 the methods and their limitations.
@@ -139,15 +163,36 @@ the methods and their limitations.
 The source release provides a *setup.py* script,
 which can be used to run the unit tests included.
 
-Source code is available at `<http://github.com/gweis/isodate>`_.
+Source code is available at `<https://github.com/gweis/isodate>`_.
+
 
 CHANGES
 =======
 
+0.7.1 (unreleased)
+------------------
+
+- no changes yet
+
+
+0.7.0 (2024-10-08)
+------------------
+
+- drop end of life python versions
+- Don't match garbage characters at the end of parsed strings #16 (Gabriel de Perthuis)
+
+
+Potentially breaking changes:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Fractional seconds are cut off to microseconds (always round down)
+- Allow control over return type of parse_duration #64 (Felix Claessen)
+
+
 0.6.1 (2021-12-13)
 ------------------
 
-- support python 3.10 ()
+- support python 3.10 (Hugo van Kemenade)
 - last version to support py 2.7
 
 
@@ -223,7 +268,7 @@ CHANGES
 0.4.3 (2010-10-29)
 ------------------
 
-- Fixed problem with %P formating and fractions (supplied by David Brooks)
+- Fixed problem with %P formatting and fractions (supplied by David Brooks)
 
 0.4.2 (2010-10-28)
 ------------------
@@ -248,6 +293,7 @@ CHANGES
 
 - Initial release
 
+
 TODOs
 =====
 
@@ -258,7 +304,7 @@ not complete.
 Missing features:
 -----------------
 
-    * time formating does not allow to create fractional representations.
+    * time formatting does not allow to create fractional representations.
     * parser for ISO intervals.
     * currently microseconds are always padded to a length of 6 characters.
       trailing 0s should be optional
@@ -286,5 +332,3 @@ Documentation:
        - localize __str__ method (does timedelta do this?)
        - when is a Duration negative?
        - normalize Durations. months [00-12] and years ]-inf,+inf[
-
-
