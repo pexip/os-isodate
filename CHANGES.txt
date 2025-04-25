@@ -2,10 +2,30 @@
 CHANGES
 =======
 
+0.7.1 (unreleased)
+------------------
+
+- no changes yet
+
+
+0.7.0 (2024-10-08)
+------------------
+
+- drop end of life python versions
+- Don't match garbage characters at the end of parsed strings #16 (Gabriel de Perthuis)
+
+
+Potentially breaking changes:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Fractional seconds are cut off to microseconds (always round down)
+- Allow control over return type of parse_duration #64 (Felix Claessen)
+
+
 0.6.1 (2021-12-13)
 ------------------
 
-- support python 3.10 ()
+- support python 3.10 (Hugo van Kemenade)
 - last version to support py 2.7
 
 
@@ -81,7 +101,7 @@ CHANGES
 0.4.3 (2010-10-29)
 ------------------
 
-- Fixed problem with %P formating and fractions (supplied by David Brooks)
+- Fixed problem with %P formatting and fractions (supplied by David Brooks)
 
 0.4.2 (2010-10-28)
 ------------------

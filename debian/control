@@ -6,19 +6,22 @@ Maintainer: Pexip AS <packaging@pexip.com>
 XSBC-Pexip-Original-Maintainer: Debian Python Team <team+python@tracker.debian.org>
 XSBC-Pexip-Original-Uploaders: Maximiliano Curia <maxy@debian.org>
 Build-Depends: debhelper-compat (= 13),
-               dh-python,
+               dh-sequence-python3,
+               pybuild-plugin-pyproject,
                python3-all,
+               python3-pytest,
                python3-setuptools,
-               python3-six <!nocheck>
-Standards-Version: 4.6.0
+Standards-Version: 4.7.0
 Vcs-Browser: https://salsa.debian.org/python-team/packages/isodate
 Vcs-Git: https://salsa.debian.org/python-team/packages/isodate.git
 Homepage: https://github.com/gweis/isodate/
 Rules-Requires-Root: no
+Testsuite: autopkgtest-pkg-pybuild
 XS-Pexip-Upstream: http://deb.debian.org/debian/ trixie
 
 Package: python3-isodate
 Architecture: all
+Multi-Arch: foreign
 Depends: ${misc:Depends},
          ${python3:Depends}
 Description: ISO 8601 date/time/duration parser and formatter (Python 3 module)
