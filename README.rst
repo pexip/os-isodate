@@ -9,10 +9,10 @@ ISO 8601 date/time parser
     :target: https://coveralls.io/r/gweis/isodate?branch=master
     :alt: Coveralls
 .. image:: https://img.shields.io/pypi/v/isodate.svg
-    :target: https://pypi.python.org/pypi/isodate/          
+    :target: https://pypi.python.org/pypi/isodate/
     :alt: Latest Version
 .. image:: https://img.shields.io/pypi/l/isodate.svg
-    :target: https://pypi.python.org/pypi/isodate/          
+    :target: https://pypi.python.org/pypi/isodate/
     :alt: License
 
 
@@ -33,12 +33,12 @@ As this module maps ISO 8601 dates/times to standard Python data types, like
 all possible ISO 8601 dates/times. For instance, dates before 0001-01-01 are
 not allowed by the Python *date* and *datetime* classes. Additionally
 fractional seconds are limited to microseconds. That means if the parser finds
-for instance nanoseconds it will round it to microseconds.
+for instance nanoseconds it will round it down to microseconds.
 
 Documentation
 -------------
 
-Currently there are four parsing methods available.
+The following parsing methods are available.
    * parse_time:
         parses an ISO 8601 time string into a *time* object
    * parse_date:
@@ -83,16 +83,15 @@ always the ISO 8601 expanded format. This is the same format used by
         prior 1900. This method also understands how to format *datetime* and
         *Duration* instances.
 
-Installation:
--------------
+Installation
+------------
 
 This module can easily be installed with Python standard installation methods.
 
-Either use *python setup.py install* or in case you have *setuptools* or
-*distribute* available, you can also use *easy_install*.
+Use *pip install isodate*.
 
-Limitations:
-------------
+Limitations
+-----------
 
    * The parser accepts several date/time representation which should be invalid
      according to ISO 8601 standard.
@@ -104,8 +103,8 @@ Limitations:
         1901-01-01.
      3. negative *Duration* and *timedelta* value are not fully supported yet.
 
-Further information:
---------------------
+Further information
+-------------------
 
 The doc strings and unit tests should provide rather detailed information about
 the methods and their limitations.
@@ -113,4 +112,4 @@ the methods and their limitations.
 The source release provides a *setup.py* script,
 which can be used to run the unit tests included.
 
-Source code is available at `<http://github.com/gweis/isodate>`_.
+Source code is available at `<https://github.com/gweis/isodate>`_.
